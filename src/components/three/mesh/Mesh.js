@@ -5,7 +5,7 @@ import {
 import mime from 'mime';
 import { assign, pick, pipe, forIn, omit, tap, map, forEach, entries } from 'lodash/fp';
 
-import * as utils from '../../utils';
+import * as utils from '../../../utils';
 
 
 const THREE = window.THREE;

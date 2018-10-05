@@ -2,14 +2,14 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import List from './components/List';
+import Room from './components/room';
 
-
-import ThreeRenderer from '../three-renderer';
-import PerspectiveCamera from '../camera';
-import OrbitControls from '../controls';
-import AmbientLight, { SpotLight, PointLight } from '../lights';
-import Scene from '../scene';
-import Mesh from '../mesh';
+import ThreeRenderer from '../three/three-renderer';
+import PerspectiveCamera from '../three/camera';
+import OrbitControls from '../three/controls';
+import AmbientLight, { SpotLight, PointLight } from '../three/lights';
+import Scene from '../three/scene';
+import Mesh from '../three/mesh';
 
 import paint from './assets/paint-normal.jpg';
 
@@ -35,30 +35,29 @@ sphere.castShadow = true; //default is false
 sphere.receiveShadow = false; //default
 // const sofaMaterial = new THREE.MeshPhongMaterial( {map: tloader.load('http://localhost:8080/sofa.jpg'), normalMap: tloader.load('http://localhost:8080/sofa-bump.jpg')} );
 
-var planeGeometry = new THREE.PlaneBufferGeometry( 600, 600, 32, 32 );
+var planeGeometry = new THREE.PlaneBufferGeometry( 1200, 600, 32, 32 );
 var planeMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } )
 var plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.receiveShadow = true;
 
 const App = ({ classes }) => (
     <div className={classes.root}>
-        <List className={classes.list}/>
         <ThreeRenderer>
             <PerspectiveCamera />
             <OrbitControls />
-            <Scene>
-                <AmbientLight color={0xffffff} intensity={0.50}/>
-                <PointLight color={0xffffff} intensity={0.90} distance={300} decay={2} castShadow />
+            <Scene background={0xf0f0f0}>
+                <AmbientLight color={0xffffff} intensity={0.70}/>
+                <PointLight color={0xffffff} intensity={0.70} distance={600} decay={2} castShadow />
                 <Mesh
                     obj="http://localhost:8080/sofa.obj"
                     position={[0, 0, 50]}
                 />
-                <Mesh mesh={sphere} position={[0, 10, 0]}/>
-                <Mesh
+                {/*<Mesh
                     mesh={plane}
                     rotation={[ -90 * Math.PI / 180, 0, 0 ]}
-                />
-                <Mesh mesh={sky}/>
+                />*/}
+                {/*<Mesh mesh={sky}/>*/}
+                <Room width={1000} height={1000} depth={1000} />
             </Scene>
         </ThreeRenderer>
     </div>

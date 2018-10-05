@@ -11,7 +11,8 @@ class Scene extends PureComponent {
     };
     constructor(props) {
         super(props);
-        this.scene = this.scene = new THREE.Scene();
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color( props.background );
     }
     componentDidMount() {
         const { registerScene } = this.context.threejs;
